@@ -1,0 +1,71 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CampusBenchDesktop.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+             <Application.Styles>
+                 <FluentTheme />
+                 <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+                 
+                 
+                 <Style>
+            <Style.Resources>
+                <Color x:Key="PrimaryColor">#FFD700</Color>        <!-- Жёлтый -->
+                <Color x:Key="SecondaryColor">#8A2BE2</Color>      <!-- Фиолетовый -->
+                <Color x:Key="BackgroundColor">#FFFFFF</Color>
+                <Color x:Key="ForegroundColor">#000000</Color>
+                <Color x:Key="AccentColor">#FFB400</Color>
+
+                <!-- 💅 Кисти -->
+                <SolidColorBrush x:Key="PrimaryBrush" Color="{DynamicResource PrimaryColor}" />
+                <SolidColorBrush x:Key="SecondaryBrush" Color="{DynamicResource SecondaryColor}" />
+                <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource BackgroundColor}" />
+                <SolidColorBrush x:Key="ForegroundBrush" Color="{DynamicResource ForegroundColor}" />
+                <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentColor}" />
+
+                <!-- 📏 Глобальные отступы -->
+                <Thickness x:Key="GlobalMargin">10</Thickness>
+            </Style.Resources>
+        </Style>
+
+        <!-- 🌍 Окно -->
+        <Style Selector="Window">
+            <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            <Setter Property="Padding" Value="20" />
+        </Style>
+
+        <!-- 🔘 Кнопки -->
+        <Style Selector="Button">
+            <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="{DynamicResource GlobalMargin}" />
+            
+        </Style>
+
+        <!-- Эффект наведения -->
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SecondaryBrush}" />
+        </Style>
+
+        <!-- 📝 Текстовые поля -->
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="#FFFBEA" />
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="6,4" />
+            <Setter Property="Margin" Value="{DynamicResource GlobalMargin}" />
+        </Style>
+
+        <!-- 📋 Общие элементы -->
+        <Style Selector="ComboBox, ListBox, CheckBox, RadioButton">
+            <Setter Property="Margin" Value="{DynamicResource GlobalMargin}" />
+        </Style>
+             </Application.Styles>
+</Application>

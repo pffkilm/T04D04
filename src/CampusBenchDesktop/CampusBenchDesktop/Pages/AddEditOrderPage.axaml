@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:con='clr-namespace:CampusBenchDesktop.Convertors'
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CampusBenchDesktop.Pages.AddEditOrderPage">
+    <UserControl.Resources>
+        <con:DateTimeToOffsetConverter x:Key="DateConverter" />
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="Имя:" />
+        <TextBox Text="{Binding name}" />
+
+        <TextBlock Text="Дата:" />
+        <DatePicker SelectedDate="{Binding dateTime, Converter={StaticResource DateConverter}}" />
+        <Button Name="BSave"
+                Content="Сохранить"
+                Click="BSave_OnClick"
+        ></Button>
+        <Button Name="BBack"
+                Content="Назад"
+                Click="BBack_OnClick"></Button>
+    </StackPanel>
+</UserControl>
