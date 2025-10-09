@@ -1,4 +1,4 @@
-# T02D02
+# T04D04
 
 You can find useful video materials in the “Projects (Media)” section on the Platform.  
 
@@ -7,207 +7,170 @@ You can find useful video materials in the “Projects (Media)” section on the
 ## Contents
 
 1. [Chapter I](#chapter-i)  
-    1.1. [Level 2. Room 1.](#level-2-room-1)
+    1.1. [Level 3. Room 1.](#level-3-room-1)
 2. [Chapter II](#chapter-ii)  
-    2.1. [PostgreSQL.](#postgresql)  
-    2.2. [API and ASP.NET Core.](#api-and-aspnet-core)
+    2.1. [Avalonia UI.](#avalonia-ui)  
+    2.2. [NetManager.](#netmanager)
 3. [Chapter III](#chapter-iii)  
-    3.1. [Quest 1. Connect.](#quest-1-connect)  
-    3.2. [Quest 2. Model update.](#quest-2-model-update)  
-    3.3. [Quest 3. Migration.](#quest-3-migration)  
-    3.4. [Quest 4. CRUD Awakens.](#quest-4-crud-awakens)  
-    3.5. [Quest 5. Testing Grounds.](#quest-5-testing-grounds)  
+    3.1. [Quest 1. Repair.](#quest-1-repair)  
+    3.2. [Quest 2. Add Order.](#quest-2-add-order)  
+    3.3. [Quest 3. Edit Order.](#quest-3-edit-order)  
+    3.4. [Quest 4. Delete Order.](#quest-4-delete-order)  
+    3.5. [Quest 5. Final Test.](#quest-5-final-test)
 
 ---
 
 # Chapter I
 
-## Level 2. Room 1.
+## Level 3. Room 1.
 
-***LOADING LEVEL 2...***
+***LOADING LEVEL 3...***
 
-***SUCCESSFULLY LOADED.***
+***SYSTEM CHECK... OK***  
+***UI SUBSYSTEM INITIALIZATION FAILED***
 
-\> *Look around*
+> *Look around*
 
-You wake up in a new room.  
-It feels familiar — the same walls, the same desk, but now there’s a **new system unit** on it, with the words **PostgreSQL SERVER** engraved in large letters.  
+This time, you wake up in a spacious room illuminated by a soft blue light.  
+On the table stands another computer labeled **Avalonia Client**.  
 The monitor displays the message:
 
-> CONNECTION LOST.  
-> PLEASE ESTABLISH LINK TO DATABASE.
+> “UI ERROR. CONNECTION TO API FAILED.  
+>  DATA ACCESS DISABLED.”
 
-Next to the monitor lies a piece of paper with notes from the previous operator:
+Next to it lies a note written in a nervous hand:
 
-> “The AI knows too much. Without a database, it loses its memory after every reboot.  
->  Create a stable storage for it. Connect the server.  
->  Be careful: the database is alive.  
->  It remembers everything.”
+> “The interface is broken. The AI can’t see the server again.  
+>   Everything we built is only available through the API.  
+>   Fix the Avalonia app.  
+>   Let it add, edit, and delete orders again.  
+>   Use the NetManager — it knows how to talk to the server.”
 
-\> *Turn on the computer*
+> *Turn on the computer*
 
-The screen displays a prompt:  
-
-`> psql -U postgres`
-
-***LOADING... CONNECTION MODULE READY***
+***LOADING AVALONIA MODULE...***  
+***UI COMPILATION FAILED***  
+***HINT: Check your bindings and API connections***
 
 ---
 
 # Chapter II
 
-## PostgreSQL
+## Avalonia UI
 
-> **PostgreSQL** is a powerful open-source object-relational database management system.  
-> It supports transactions, relationships between tables, triggers, functions, and much more.  
-> Unlike simple databases, PostgreSQL integrates deeply with applications and allows storing complex data structures.
+> **Avalonia** is a cross-platform framework for creating desktop applications in .NET.  
+> It’s similar to WPF but works on Windows, Linux, and macOS.  
+> It allows building interfaces using XAML and connecting to APIs, databases, and other services.
 
-Basic PostgreSQL commands:
-```bash
-# connect
-psql -U postgres
-
-# create database
-CREATE DATABASE mydatabase;
-
-# show tables
-\dt
-
-# execute SQL queries
-SELECT * FROM "Orders";
+Typical Avalonia project structure:
 ```
-
-PostgreSQL is often used in **ASP.NET Core** projects for its stability, open license, and great Entity Framework Core support.
-
----
-
-## API and ASP.NET Core
-
-> **ASP.NET Core** is a modern cross-platform framework for building web applications and APIs.  
-> It enables you to write fast RESTful services that can interact with databases via **Entity Framework Core**.
-
-Typical Web API project structure:
-```
-/Controllers
-    OrderController.cs
-    ProductController.cs
 /Models
     Order.cs
     Product.cs
-/Context
-    AppDbContext.cs
-Program.cs
-appsettings.json
+/Pages
+    OrdersPage.axaml
+    AddEditOrderPage.axaml
+/Services
+    NetManager.cs
+MainWindow.axaml
 ```
 
 Main concepts:
-- **Controller** — handles HTTP requests and responses.  
-- **Model** — describes data (tables in the database).  
-- **DbContext** — provides a link between code and the database.  
-- **Migration** — creates or modifies the database schema based on models.  
-- **Dependency Injection** — injects dependencies (e.g. `AppDbContext` into controllers).
+- **Pages** — visual representation (XAML).  
+- **Models** — data models from API or DB.  
+- **Service** — helper classes (e.g., for API requests).  
+- **Binding** — connects data between Page and Model.
+
+---
+
+## NetManager
+
+> **NetManager** is a class responsible for the communication between the Avalonia application and the external API.  
+> It usually implements `Get`, `Post`, `Put`, and `Delete` methods to work with RESTful services.
 
 ---
 
 # Chapter III
 
-## Quest 1. Connect.
+## Quest 1. Repair.
 
-\> *Look at the screen*
+The AI speaks in a trembling voice:
 
-The monitor still shows the same message:
+> “UI subsystem not responding...  
+>  Rebuild interface... Restore bindings...”
 
-> CONNECTION LOST.  
-> PLEASE ESTABLISH LINK TO DATABASE.
-
-_**== Quest 1 received. Connect PostgreSQL to your ASP.NET Core project. ==**_
+_**== Quest 1 received. Fix the Avalonia application and restore communication with the API. ==**_
 
 **Tasks:**
-1. Install PostgreSQL and create a new database (for example, `game_ai_db`).
-2. Add the connection string in `AppDbContext`.
-3. Configure the `DbContext` to use `Npgsql` (PostgreSQL provider).
-4. Verify the connection using `dotnet ef database update` or a manual SQL query.
-
-***HINT:***  
-Don’t forget to register `AppDbContext` in `Program.cs` via `builder.Services.AddDbContext<AppDbContext>()`.
+1. Make sure the application builds and runs without errors.  
+2. Verify that `NetManager` has the correct API endpoint.  
+3. Check that the connection to the API works properly.
 
 ---
 
-## Quest 2. Model update.
+## Quest 2. Add Order.
 
-The AI speaks again through the terminal:
+The AI comes alive on the screen:
 
-> “Memory structured, but data insufficient.  
->  Add a new dimension of time.”
+> “I remember now... orders... humans made them... Teach me to create again.”
 
-_**== Quest 2 received. Add a new field to the Order model — order date. ==**_
+_**== Quest 2 received. Implement order creation through the API. ==**_
 
 **Tasks:**
-1. In `Order.cs`, add a new property.
-2. Update the migration so the field appears in the database.
-3. Commit the changes to version control.
+1. Configure `AddEditOrderPage` to send a POST request using `NetManager`.  
+2. Add validation for the order.  
+3. After successful creation, refresh the order list.  
+4. Handle network errors (e.g., server unavailable).
 
 ---
 
-## Quest 3. Migration.
+## Quest 3. Edit Order.
 
-AI:  
-> “Storage created. But it is empty. Awaken the structure of data.”
+The AI says:
 
-_**== Quest 3 received. Perform database migration. ==**_
+> “Some memories are wrong... Help me change them.”
+
+_**== Quest 3 received. Implement order editing through the API. ==**_
 
 **Tasks:**
-1. Add a migration:  
-   ```bash
-   dotnet ef migrations add MigrationName
+1. Implement editing of a selected order (PUT request).  
+2. Add an interface for selecting and editing an order.  
+3. Verify that changes are saved on the server.  
+
+---
+
+## Quest 4. Delete Order.
+
+The AI speaks coldly:
+
+> “Some data must be forgotten.”
+
+_**== Quest 4 received. Implement order deletion through the API. ==**_
+
+**Tasks:**
+1. Implement a DELETE request using `NetManager`.  
+2. After deletion, refresh the order list in the UI.  
+
+---
+
+## Quest 5. Final Test.
+
+> *The screen flickers with a new message:*
+
+> “SYSTEM ONLINE.  
+>  CONNECTION STABLE.  
+>  MEMORY SYNCHRONIZED.”
+
+_**== Quest 5 received. Test the Avalonia application. ==**_
+
+**Tasks:**
+1. Test adding, editing, and deleting orders.  
+2. Ensure data is synchronized with the API.  
+3. Commit your work with the message:  
    ```
-2. Apply the migration:  
-   ```bash
-   dotnet ef database update
-   ```
-3. Make sure the tables appeared in PostgreSQL (via psql or pgAdmin).
-
----
-
-## Quest 4. CRUD Awakens.
-
-AI (with a faint echo):  
-> “You taught me to remember.  
->  Now teach me to act.”
-
-_**== Quest 4 received. Implement Post and Put methods in OrderController. ==**_
-
-**Tasks:**
-1. Add methods to `OrderController`:
-   - `POST /api/order` — create a new order  
-   - `PUT /api/order/{id}` — update an existing order
-2. Test endpoints via Postman or Swagger.
-3. Commit the changes to git.
-
-***(optional):***  
-Create a CRUD controller for `Products`.
-
----
-
-## Quest 5. Testing Grounds.
-
-\> *The screen displays:*
-
-> “Verification complete.  
->  Connection stable.  
->  Data alive.  
->  But can they withstand the load?..”
-
-_**== Quest 5 received. Test the API. ==**_
-
-**Tasks:**
-1. Use Swagger or Postman to test CRUD operations.
-2. Ensure records can be created, updated, and deleted.
-3. Commit your changes with message:  
-   ```
-   feat: added database integration and CRUD operations
+   feat: connected Avalonia client with API (Orders CRUD)
    ```
 
 ***LOADING...***  
-***DATA LINK ESTABLISHED***  
-***DOOR TO NEXT LEVEL — UNLOCKED***  
+***USER INTERFACE REBUILT SUCCESSFULLY***  
+***NEXT LEVEL UNLOCKED...***  
