@@ -14,8 +14,6 @@ public partial class AddEditOrderPage : UserControl
     public AddEditOrderPage(Order order)
     {
         InitializeComponent();
-        if (order.dateTime == default)
-            order.dateTime = DateTime.Now;
         _contextOrder = order;
         DataContext = order;
     }

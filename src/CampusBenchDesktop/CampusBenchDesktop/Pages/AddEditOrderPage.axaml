@@ -2,24 +2,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:con='clr-namespace:CampusBenchDesktop.Convertors'
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:con="clr-namespace:CampusBenchDesktop.Convertors"
+             mc:Ignorable="d"
+             d:DesignWidth="800" d:DesignHeight="500"
              x:Class="CampusBenchDesktop.Pages.AddEditOrderPage">
+
     <UserControl.Resources>
         <con:DateTimeToOffsetConverter x:Key="DateConverter" />
     </UserControl.Resources>
-    <StackPanel>
-        <TextBlock Text="Имя:" />
-        <TextBox Text="{Binding name}" />
 
-        <TextBlock Text="Дата:" />
-        <DatePicker SelectedDate="{Binding dateTime, Converter={StaticResource DateConverter}}" />
-        <Button Name="BSave"
-                Content="Сохранить"
-                Click="BSave_OnClick"
-        ></Button>
-        <Button Name="BBack"
-                Content="Назад"
-                Click="BBack_OnClick"></Button>
-    </StackPanel>
+    <Border Background="{DynamicResource BackgroundBrush}"
+            Padding="30"
+            CornerRadius="12">
+        <StackPanel Spacing="20">
+            <!-- 🔹 Заголовок -->
+            <TextBlock Text="{Binding PageTitle, FallbackValue='📝 Создание заказа'}"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource SecondaryBrush}"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10"/>
+
+            <!-- 📋 Форма -->
+            <StackPanel Spacing="12" Width="400" HorizontalAlignment="Center">
+                <!-- Имя заказа -->
+                <StackPanel>
+                    <TextBlock Text="Название заказа:"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource ForegroundBrush}"/>
+                    <TextBox Text="{Binding name}"
+                             Watermark="Введите название заказа..."
+                             Width="400"
+                             HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <!-- Состав заказа -->
+                <StackPanel>
+                    <TextBlock Text="Состав заказа:"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource ForegroundBrush}"/>
+                    <ListBox ItemsSource="{Binding products}"
+                             Width="400"
+                             Height="120"
+                             Background="#FFFBEA"
+                             BorderBrush="{DynamicResource PrimaryBrush}"
+                             BorderThickness="1"
+                             CornerRadius="8">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding name, StringFormat='• {0}'}"
+                                           FontSize="14"
+                                           Margin="5,2"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- 🔘 Кнопки -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Spacing="15"
+                        Margin="0,20,0,0">
+                <Button Name="BSave"
+                        Content="💾 Сохранить"
+                        Width="150"
+                        Click="BSave_OnClick"/>
+                <Button Name="BBack"
+                        Content="↩️ Назад"
+                        Width="150"
+                        Background="{DynamicResource SecondaryBrush}"
+                        Click="BBack_OnClick"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
 </UserControl>

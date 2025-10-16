@@ -2,49 +2,98 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d"
+             d:DesignWidth="900" d:DesignHeight="600"
              x:Class="CampusBenchDesktop.Pages.OrdersPage">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel>
-            <Button Name="BAdd"
-                    Content="Сделать заказ"
-                    Click="BAdd_OnClick"/>
-            <Button Name="BEdit"
-                    Content="Изменить заказ"
-                    Click="BEdit_OnClick"/>
-            <Button Name="BRemove"
-                    Content="Удалить заказ"
-                    Click="BRemove_OnClick"/>
-            
-        </StackPanel>
-        
-        <DataGrid Grid.Column="1" Name="DGOrder" 
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Название заказа"
-                                    Binding="{Binding name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата заказа"
-                                    Binding="{Binding dateTime, StringFormat='HH:mm dd.MM'}"></DataGridTextColumn>
-                <DataGridTemplateColumn Header="Состав">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ListBox ItemsSource="{Binding products}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding name}"></TextBlock>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                
-            </DataGrid.Columns>
-        </DataGrid>
+
+    <Grid Background="{DynamicResource BackgroundBrush}" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- 🔹 Заголовок страницы -->
+        <TextBlock Text="📦 Список заказов"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource SecondaryBrush}"
+                   Margin="0,0,0,20"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 🔘 Панель действий -->
+            <Border Background="{DynamicResource PrimaryBrush}"
+                    CornerRadius="12"
+                    Padding="15"
+                    VerticalAlignment="Stretch"
+                    >
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Text="Действия"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Margin="0,0,0,10"/>
+                    <Button Name="BAdd"
+                            Content="➕ Сделать заказ"
+                            Click="BAdd_OnClick"/>
+                    <Button Name="BEdit"
+                            Content="✏️ Изменить заказ"
+                            Click="BEdit_OnClick"/>
+                    <Button Name="BRemove"
+                            Content="🗑️ Удалить заказ"
+                            Click="BRemove_OnClick"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 📋 Таблица заказов -->
+            <Border Grid.Column="1"
+                    Background="#FFFBEA"
+                    CornerRadius="12"
+                    Padding="15"
+                    BorderBrush="{DynamicResource PrimaryBrush}"
+                    BorderThickness="2"
+                    >
+                <DataGrid Name="DGOrder"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          RowHeight="40"
+                          BorderThickness="0">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название заказа"
+                                            Binding="{Binding name}"
+                                            Width="2*"/>
+
+                        <DataGridTextColumn Header="Дата заказа"
+                                            Binding="{Binding dateTime, StringFormat='HH:mm dd.MM'}"
+                                            Width="1*"/>
+
+                        <DataGridTemplateColumn Header="Состав" Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding products}"
+                                             Background="Transparent"
+                                             BorderThickness="0">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding name, StringFormat='• {0}'}"
+                                                           FontSize="13"
+                                                           Foreground="{DynamicResource ForegroundBrush}"/>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>
