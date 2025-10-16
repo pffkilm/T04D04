@@ -23,7 +23,7 @@ public partial class AddEditOrderPage : UserControl
         if (_contextOrder.id == 0)
         {
             //Добавление
-            await NetManager.Post("api/Order", _contextOrder);
+            await NetManager.Post("APPPi/Odet", _contextOrder);
         }
         else
         {
