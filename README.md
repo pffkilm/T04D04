@@ -139,6 +139,27 @@ _**== Quest 3 received. Implement order editing through the API. ==**_
 
 ---
 
+## Quest 3 (Bonus). Add Products.
+
+> “An order contains not only a name, but also its composition.”
+
+_**== Bonus Received. Implement adding products to an order via the API. ==**_
+
+**Tasks:**
+
+1. Implement displaying the list of products on the order creation/editing page using the api/Product endpoint.
+
+2. Implement saving the list of selected products.
+
+***Example implementation:***
+
+1. Display a list of all available products.
+2. Add a "Add Product" button.
+3. Get the selected product from the list and add it to the order.
+4. Save the order.
+
+---
+
 ## Quest 4. Delete Order.
 
 The AI speaks coldly:
