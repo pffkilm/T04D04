@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -20,17 +21,21 @@ public partial class AddEditOrderPage : UserControl
 
     private async void BSave_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (_contextOrder.id == 0)
+        if (!string.IsNullOrWhiteSpace(_contextOrder.name))
         {
-            //Добавление
-            await NetManager.Post("APPPi/Odet", _contextOrder);
-        }
-        else
-        {
-            //Изменение
-        }
-        App.mainWindow.MainFrame.Content = new OrdersPage();
+            if (_contextOrder.id == 0)
+            {
+                //Добавление
+                await NetManager.Post("api/Order", _contextOrder);
+            }
+            else
+            {
+                //Изменение
+                await NetManager.Put($"api/Order/{_contextOrder.id}", _contextOrder);
 
+            }
+            App.mainWindow.MainFrame.Content = new OrdersPage();
+        }
     }
 
     private void BBack_OnClick(object? sender, RoutedEventArgs e)

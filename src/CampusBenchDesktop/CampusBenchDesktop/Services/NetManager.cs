@@ -7,12 +7,12 @@ namespace CampusBenchDesktop.Services;
 
 public static class NetManager
     {
-        public static string Url = "http://localhost:5107/";
+    public static string Url = "https://localhost:56305/";
         private static HttpClient httpClient = new HttpClient();
 
         public static async Task<T> Get<T>(string path)
         {
-            var response = await httpClient.GetAsync(Url + path);
+        var response = await httpClient.GetAsync(Url + path);
             var content = await response.Content.ReadAsStringAsync();
             var data = JsonConvert.DeserializeObject<T>(content);
             return data;
@@ -35,6 +35,7 @@ public static class NetManager
         {
             var response = await httpClient.DeleteAsync(Url + path);
             return response;
+
         }
 
         public static async Task<T> ParseResponse<T>(HttpResponseMessage responseMessage)

@@ -46,9 +46,16 @@ public partial class OrdersPage : UserControl
     {
         if (DGOrder.SelectedItem is Order order)
         {
+
+
+            // DELETE-запрос
+            await NetManager.Delete($"api/Order/{order.id}");
+
+            // ќЅЌќ¬Ћя≈ћ список заказов
             Refresh();
         }
-    }
 
-    
+    }
 }
+    
+
